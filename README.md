@@ -25,7 +25,14 @@ After installing the dependencies, you can run:
 ### `npm start`
 
 Runs the app in development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser
+
+![image](https://github.com/user-attachments/assets/5d6a1b7a-c4a5-42ec-92e6-c168817f0a05)
+.
+
+if getting this error that means there is CORS error you have  to use the cors extension which will make it working
+
+(https://chromewebstore.google.com/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf)
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
