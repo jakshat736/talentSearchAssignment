@@ -1,7 +1,7 @@
-import { Box, CircularProgress, Grid, Typography } from '@mui/material';
-import React, { useContext, useEffect, useState } from 'react';
+import { Box, Card, CircularProgress, Grid, Typography } from '@mui/material'
+import React, { useContext, useEffect, useState } from 'react'
+import ProductTable from './Table'
 import { SessionContext } from './SessionContext';
-import ProductTable from './Table';
 
 const Home = () => {
     const { setProducts } = useContext(SessionContext);
@@ -9,26 +9,31 @@ const Home = () => {
     const [loading, setLoading] = useState(true);
 
 
-    useEffect(() => {
-        fetch('https://cdn.drcode.ai/interview-materials/products.json')
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then((data) => {
-                setProducts(data?.products);
-                setLoading(false)
-            })
-            .catch((error) => {
+useEffect(() => {
+    fetch('https://cdn.drcode.ai/interview-materials/products.json')
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then((data) => {
+            setProducts(data?.products);
+            setLoading(false);
+        })
+        .catch((error) => {
+            if (error.message.includes('Failed to fetch') || error.message.includes('CORS')) {
+                setError(new Error('CORS error occurred. Please enable CORS by installing this Chrome extension: <a href="https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf" target="_blank" rel="noopener noreferrer">Allow CORS</a>'));
+            } else {
                 setError(error);
-                setLoading(false)
+            }
+            setLoading(false);
+        });
+}, []);
 
-            });
-    }, []);
+    
 
-    if (error) return <Typography variant='h4' color="error" textAlign='center'>Error: {error.message}</Typography>;
+    if (error) return <Typography variant='h6' color="error" textAlign='center'>Error:  <div dangerouslySetInnerHTML={{ __html: error.message }} /></Typography>;
 
 
     return (
