@@ -2,10 +2,11 @@ import { BrowserRouter as Router,Routes,Route } from "react-router-dom";
 import Home from "./Components/Home";
 import { useState } from "react";
 import { SessionContext } from "./Components/SessionContext";
+import { productsData } from "./Components/Data";
 
 
 function App() {
-  const [products, setProducts] = useState()
+  const [products, setProducts] = useState(productsData)
   return (
     <div >
       <SessionContext.Provider value={{ products, setProducts }}>
